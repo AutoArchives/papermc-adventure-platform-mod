@@ -26,7 +26,6 @@ package net.kyori.adventure.platform.modcommon.impl.mixin.minecraft.world.item;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 import java.util.function.UnaryOperator;
 import net.kyori.adventure.key.Key;
 import net.kyori.adventure.platform.modcommon.impl.nbt.ModDataComponentValue;
@@ -36,6 +35,7 @@ import net.kyori.adventure.text.event.HoverEventSource;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponentPatch;
 import net.minecraft.core.component.DataComponentType;
+import net.minecraft.core.component.TypedDataComponent;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStackTemplate;
@@ -67,16 +67,19 @@ public abstract class ItemStackTemplateMixin implements HoverEventSource<HoverEv
       components = Collections.emptyMap();
     } else {
       components = new HashMap<>();
-      for (final Map.Entry<DataComponentType<?>, Optional<?>> entry : patch.entrySet()) {
-        if (entry.getKey().isTransient()) continue;
+      final DataComponentPatch.SplitResult split = patch.split();
+      for (final DataComponentType<?> entry : split.removed()) {
+        if (entry.isTransient()) continue;
 
-        final Key componentKey = (Key) (Object) BuiltInRegistries.DATA_COMPONENT_TYPE.getKey(entry.getKey());
-        if (entry.getValue().isEmpty()) {
-          components.put(componentKey, ModDataComponentValue.Removed.INSTANCE);
-        } else {
-          @SuppressWarnings({"rawtypes", "unchecked"}) final ModDataComponentValue.Present<?> holder = new ModDataComponentValue.Present(entry.getValue().orElse(null), entry.getKey().codecOrThrow());
-          components.put(componentKey, holder);
-        }
+        final Key componentKey = (Key) (Object) BuiltInRegistries.DATA_COMPONENT_TYPE.getKey(entry);
+        components.put(componentKey, ModDataComponentValue.Removed.INSTANCE);
+      }
+      for (final TypedDataComponent<?> entry : split.added()) {
+        if (entry.type().isTransient()) continue;
+
+        final Key componentKey = (Key) (Object) BuiltInRegistries.DATA_COMPONENT_TYPE.getKey(entry.type());
+        @SuppressWarnings({"rawtypes", "unchecked"}) final ModDataComponentValue.Present<?> holder = new ModDataComponentValue.Present(entry.value(), entry.type().codecOrThrow());
+        components.put(componentKey, holder);
       }
     }
 

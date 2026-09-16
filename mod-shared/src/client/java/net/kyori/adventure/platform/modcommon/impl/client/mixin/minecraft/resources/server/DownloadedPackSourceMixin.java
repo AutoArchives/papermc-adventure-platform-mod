@@ -1,7 +1,7 @@
 /*
  * This file is part of adventure-platform-mod, licensed under the MIT License.
  *
- * Copyright (c) 2023-2024 KyoriPowered
+ * Copyright (c) 2023-2026 KyoriPowered
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -38,7 +38,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(DownloadedPackSource.class)
 public class DownloadedPackSourceMixin {
   // @formatter:off
-  @Shadow PackLoadFeedback packFeedback;
+  @Shadow private PackLoadFeedback packFeedback;
   // @formatter:on
 
   @Inject(method = "configureForServerControl", at = @At(value = "FIELD", opcode = Opcodes.PUTFIELD, target = "Lnet/minecraft/client/resources/server/DownloadedPackSource;packFeedback:Lnet/minecraft/client/resources/server/PackLoadFeedback;", shift = At.Shift.AFTER))
