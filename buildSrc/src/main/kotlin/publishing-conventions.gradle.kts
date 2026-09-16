@@ -11,6 +11,10 @@ indraCrossdoc {
   }
 }
 
+indra {
+  publishSnapshotsTo("sonatype", "https://central.sonatype.com/repository/maven-snapshots/")
+}
+
 tasks {
   javadoc {
     val options = this.options as StandardJavadocDocletOptions
