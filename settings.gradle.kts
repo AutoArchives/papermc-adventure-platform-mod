@@ -26,7 +26,7 @@ pluginManagement {
 plugins {
   id("org.gradle.toolchains.foojay-resolver-convention") version "1.0.0"
   id("net.kyori.indra.publishing.central") version "4.1.0"
-  id("net.fabricmc.fabric-loom-repositories") version "1.17.21"
+  id("net.fabricmc.fabric-loom-repositories") version "1.18.2"
   id("net.neoforged.moddev.repositories") version "2.0.147"
 }
 
@@ -50,7 +50,7 @@ dependencyResolutionManagement {
 
   versionCatalogs {
     create("fabricApiLibs") {
-      from("net.fabricmc.fabric-api:fabric-api-catalog:0.160.5+26.3")
+      from("net.fabricmc.fabric-api:fabric-api-catalog:0.160.6+26.3")
     }
   }
 }
