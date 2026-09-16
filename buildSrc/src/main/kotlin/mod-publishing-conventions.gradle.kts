@@ -1,4 +1,5 @@
 import me.modmuss50.mpp.ReleaseType
+import me.modmuss50.mpp.platforms.modrinth.ModrinthEnvironment
 
 plugins {
   id("publishing-conventions")
@@ -13,4 +14,5 @@ publishMods.modrinth {
   minecraftVersions = providers.gradleProperty("modrinthMinecraftVersions").map {
     it.split(',').map(String::trim)
   }
+  environment = ModrinthEnvironment.CLIENT_OR_SERVER_PREFERS_BOTH
 }
