@@ -1,8 +1,6 @@
 plugins {
   id 'java'
   alias(libs.plugins.eclipseApt)
-  alias(libs.plugins.indra.sonatype)
-  alias(libs.plugins.nexusPublish)
   alias(libs.plugins.ideaExt)
 }
 

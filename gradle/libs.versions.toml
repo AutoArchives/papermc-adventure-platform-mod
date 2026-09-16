@@ -8,7 +8,7 @@ autoService = "1.1.1"
 checkstyle = "13.0.0"
 fabricApi = "0.160.5+26.3"
 fabricLoader = "0.19.5"
-indra = "4.0.0"
+indra = "4.1.0"
 mod-publish-plugin = "2.1.1"
 junit = "6.1.2"
 minecraft = "26.3"
@@ -78,6 +78,5 @@ indra-licenseHeader = { id = "net.kyori.indra.licenser.spotless", version.ref = 
 indra-checkstyle = { id = "net.kyori.indra.checkstyle" }
 indra-publishing = { id = "net.kyori.indra.publishing" }
 indra-crossdoc = { id = "net.kyori.indra.crossdoc" }
-indra-sonatype = { id = "net.kyori.indra.publishing.sonatype", version.ref = "indra" }
-nexusPublish = { id = "io.github.gradle-nexus.publish-plugin", version = "2.0.0" }
+indra-central = { id = "net.kyori.indra.publishing.central", version.ref = "indra" }
 spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }

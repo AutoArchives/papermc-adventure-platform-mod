@@ -25,6 +25,7 @@ pluginManagement {
 
 plugins {
   id("org.gradle.toolchains.foojay-resolver-convention") version "1.0.0"
+  id("net.kyori.indra.publishing.central") version "4.1.0"
   id("net.fabricmc.fabric-loom-repositories") version "1.17.21"
   id("net.neoforged.moddev.repositories") version "2.0.147"
 }
